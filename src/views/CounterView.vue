@@ -1,52 +1,38 @@
 <template>
   <div class="counting">
-    <img alt="Counter Image" src="../assets/counter.jpg" />
-    <h1 class>Counter</h1>
+    <img src="../assets/counter.jpg">
     <p>{{ count }}</p>
-    <button @click="incrementCount" class="btn">Increment</button>
-    <!-- <div class="resetContainer"> -->
+    <button @click="increment" class="btn">Increment</button>
+    <button @click="decrement" class="btn">Decrement</button>
     <button @click="reset" class="btn">Reset</button>
-    <!-- </div> -->
-    <button @click="decrementCount" class="btn">Decrement</button>
-    <button @click="setValue" class="btn">Set Value</button>
+    <input type="number" v-model.number="value" />
+    <button @click="setValue(value)">Set Value</button>
+
     <br />
-    <router-link to="/" class="btn2"> Go back Home </router-link>
+    <router-link to="/" class="btn2"> Go Back Home </router-link>
+    
   </div>
 </template>
 
 <script>
+import { ref } from "vue";
+import useCounter from "@/composables/useCounter";
+import { RouterLink } from "vue-router";
+
 export default {
-  name: "CounterView",
-  props: {
-    msg: String,
-  },
-
-  data() {
-    return {
-      count: 0,
-    };
-  },
-
-  methods: {
-    incrementCount() {
-      this.count++;
+    setup() {
+        const { count, increment, decrement, reset, setValue } = useCounter();
+        const value = ref(0);
+        return {
+            count,
+            increment,
+            decrement,
+            reset,
+            value,
+            setValue,
+        };
     },
-
-    decrementCount() {
-      this.count--;
-    },
-
-    reset() {
-      this.count = 0;
-    },
-
-    setValue() {
-      let value = prompt("Enter a value");
-      if (value != null && value >= 0) {
-        this.count = value;
-      }
-    },
-  },
+    components: { RouterLink }
 };
 </script>
 
@@ -56,7 +42,7 @@ export default {
 } */
 
 p {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 img {
   width: 200px;
@@ -85,14 +71,33 @@ h1 {
   cursor: pointer;
 }
 
-.btn2{
-    margin-top: 400px;
-    font-size: 2rem;
-    background-color: #717975;
-    color: white;
-    border: none;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 10px;
+.btn2 {
+  margin-top: 30px;
+  font-size: 2rem;
+  background-color: #717975;
+  color: white;
+  border: none;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 5px 5px;
+}
+
+.btn2:hover {
+  background-color: #42b983;
+  color: white;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+input{
+  height: 30px;
+  width: 300px;
+  border: 5px solid #42b983;
+  font-size: 2rem;
+  text-align: center;
+}
+
+input:focus{
+  outline: none;
 }
 </style>
