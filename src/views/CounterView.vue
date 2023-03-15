@@ -6,7 +6,7 @@
     <button @click="decrement" class="btn">Decrement</button>
     <button @click="reset" class="btn">Reset</button>
     <input type="number" v-model.number="value" />
-    <button @click="setValue(value)">Set Value</button>
+    <button @click="setValue(value)" class="inputbtn">Set Value</button>
 
     <br />
     <router-link to="/" class="btn2"> Go Back Home </router-link>
@@ -99,5 +99,20 @@ input{
 
 input:focus{
   outline: none;
+}
+
+.inputbtn{
+width: 90px;
+height: 40px;
+margin-left: 10px;
+background-color: black;
+color: red;
+font-size: 1rem;
+}
+
+.inputbtn:hover{
+  background-color: #42b983;
+  color: white;
+  cursor: pointer;
 }
 </style>

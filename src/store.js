@@ -1,10 +1,8 @@
 import { createStore } from "vuex";
 
-const store = createStore({
-  state() {
-    return {
-      count: 0,
-    };
+export default createStore({
+  state: {
+    count: 0,
   },
   mutations: {
     increment(state) {
@@ -13,19 +11,11 @@ const store = createStore({
     decrement(state) {
       state.count--;
     },
-    setValue(state, payload) {
-      state.count = payload;
+    reset(state) {
+      state.count = 0;
     },
-  },
-  actions: {
-    increment(context) {
-      context.commit("increment");
-    },
-    decrement(context) {
-      context.commit("decrement");
-    },
-    setValue(context, payload) {
-      context.commit("setValue", payload);
+    setValue(state, value) {
+      state.count = value;
     },
   },
   getters: {
@@ -34,5 +24,3 @@ const store = createStore({
     },
   },
 });
-
-export default store;
